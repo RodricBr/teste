@@ -10,11 +10,12 @@ echo -e "\n\n+----------[ Verificação Iniciada $HORA ]----------+"
 while IFS= read -r line; do
 
   echo -e "\n>>> URL: $line"
+  
   WEBSITEHTTP=$(echo "http://$line")
   WEBSITEHTTPS=$(echo "https://$line")
   RESULTSERVERHTTP=$(echo | curl -s -I $WEBSITEHTTP --connect-timeout 3 | grep -e Server:)
   RESULTSERVERHTTPS=$(echo | curl -s -I $WEBSITEHTTPS --connect-timeout 3 | grep -e Server:)
-  #Resultados apresentados em tela e salvos em uma lista BANNER-LIST.txt
+  
   if [ -z "$RESULTSERVERHTTP" ]; then
     false
   else
