@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Requer um arquivo chamado urls
+# contendo as urls a serem analisadas
 
 input="urls"
 HORA="$(date +'%d/%m/%y | %T')"
