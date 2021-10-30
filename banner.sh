@@ -3,7 +3,7 @@
 # Requer um arquivo chamado urls
 # contendo as urls a serem analisadas
 
-input="urls"
+AQUIV="urls"
 HORA="$(date +'%d/%m/%y | %T')"
 
 echo -e "\n\n+----------[ Verificação Iniciada $HORA ]----------+"
@@ -29,4 +29,4 @@ while IFS= read -r line; do
     echo -e "+ Resposta em HTTPS:\n$RESULTSERVERHTTPS"
   fi
 
-done < "$input"
+done < "$AQUIV"
