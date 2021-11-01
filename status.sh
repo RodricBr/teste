@@ -1,8 +1,9 @@
 #!/usr/bin/bash
 
-# Requer um arquivo chamado urls
+# Requer um arquivo chamado 'urls'
 # contendo as urls a serem analisadas
 
+# Variável que recebe o arquivo 'urls'
 ARQ="urls"
 HORA="$(date +'%d/%m/%y | %T')"
 echo "+----------[ Resultados $HORA ]----------+"
