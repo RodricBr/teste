@@ -5,33 +5,20 @@ if [[ -z "$*" ]]; then
 elif [[ ! -z "$*" ]]; then
   
   touch url
-  #echo -e "\n---[ + ]--- Omnisint:\n" >> $1-subs.txt
+  echo -e "\n---[ + ]--- Omnisint:\n" >> url
   OMN=$(curl "https://sonar.omnisint.io/subdomains/$1" -s -k | grep -oE "[a-zA-Z0-9._-]+\.$1" >> url)
-  #echo -e "\n---[ + ]--- Anubis:\n" >> $1-subs.txt
+  echo -e "\n---[ + ]--- Anubis:\n" >> url
   ANU=$(curl "https://jldc.me/anubis/subdomains/$1" -s -k | grep -oE "[a-zA-Z0-9._-]+\.$1" >> url)
-  #echo -e "\n+--------------------------------------------------------------------------------+\n" >> url
+  echo -e "\n+--------------------------------------------------------------------------------+\n" >> url
 
-  doit() {
+  STATUS() {
       url="$1"
-      #uri="$2"
       urlstatus=$(curl -o /dev/null -k -s --head --write-out  '%{http_code}' "${url}" --max-time 5 ) &&
       echo "URL: $url CODE: $urlstatus"
   }
-  export -f doit
+  export -f STATUS
 
-  parallel -j200 doit :::: url >> resp
-
-
-  #doit() {
-  #  URLS=$(cat $OMN | cat $ANU)
-  #  #uri="$2"
-  #  urlstatus=$(curl -o /dev/null -k -s --head --write-out  '%{http_code}' "${URLS}" --max-time 5 ) &&
-  #  echo "URL: $ULRS CODE: $urlstatus"
-  #}
-  #export -f doit
-
-  #parallel -j200 doit :::: url >> resp
-
+  parallel -j200 STATUS :::: url >> resp 2>/dev/null
 
   if [[ -f "url" ]]; then
     echo -e "Arquivo com subdominios criado!"
