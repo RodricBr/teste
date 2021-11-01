@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 # Requer um arquivo chamado 'urls'
+# no mesmo diretório do status-code.sh
 # contendo as urls a serem analisadas
 
 # Variável que recebe o arquivo 'urls'
