@@ -12,21 +12,21 @@ while IFS= read -r line; do
 
   echo -e "\n>>> URL: $line"
   
-  WEBSITEHTTP=$(echo "http://$line")
-  WEBSITEHTTPS=$(echo "https://$line")
-  RESULTSERVERHTTP=$(echo | curl -s -I $WEBSITEHTTP --connect-timeout 3 | grep -e Server:)
-  RESULTSERVERHTTPS=$(echo | curl -s -I $WEBSITEHTTPS --connect-timeout 3 | grep -e Server:)
+  WEBHTTP=$(echo "http://$line")
+  WEBHTTPS=$(echo "https://$line")
+  RESULTHTTP=$(echo | curl -s -I $WEBHTTP --connect-timeout 3 | grep -e Server:)
+  RESULTHTTPS=$(echo | curl -s -I $WEBHTTPS --connect-timeout 3 | grep -e Server:)
   
-  if [ -z "$RESULTSERVERHTTP" ]; then
+  if [ -z "$RESULTHTTP" ]; then
     false
   else
-    echo -e "+ Resposta em HTTP:\n$RESULTSERVERHTTP"
+    echo -e "+ Resposta em HTTP:\n$RESULTHTTP"
   fi
 
-  if [ -z "$RESULTSERVERHTTPS" ]; then
+  if [ -z "$RESULTHTTPS" ]; then
     false
   else
-    echo -e "+ Resposta em HTTPS:\n$RESULTSERVERHTTPS"
+    echo -e "+ Resposta em HTTPS:\n$RESULTHTTPS"
   fi
 
 done < "$AQUIV"
