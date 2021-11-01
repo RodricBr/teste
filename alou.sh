@@ -1,11 +1,9 @@
 doit() {
     url="$1"
-    uri="$2"
-    urlstatus=$(curl -o /dev/null --insecure --silent --head --write-out  '%{http_code}' "${url}""${uri}" --max-time 5 ) &&
-    echo "$url  $urlstatus $uri"
+    #uri="$2"
+    urlstatus=$(curl -o /dev/null -k -s --head --write-out  '%{http_code}' "${url}" --max-time 5 ) &&
+    echo "URL: $url CODE: $urlstatus"
 }
 export -f doit
 
-parallel -j200 doit :::: url uri >> urlstatus.txt
-
-# teste
+parallel -j200 doit :::: url >> resp
