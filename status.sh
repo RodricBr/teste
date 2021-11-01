@@ -8,6 +8,7 @@ ARQ="urls"
 HORA="$(date +'%d/%m/%y | %T')"
 echo "+----------[ Resultados $HORA ]----------+"
 
+# Internal Field Separator(IFS) para evitar espaços em branco no output
 while IFS= read -r line; do
   WEBHTTP=$(echo "http://$line")
   WEBHTTPS=$(echo "https://$line")
@@ -17,4 +18,5 @@ while IFS= read -r line; do
   IP=$(echo | nslookup $domain | awk '/^Address/{n++; if (n==2) {print $2}; if (n==3){print $2}; if (n==4){exit}}')
   
   echo -e "\n+URL: $line\n+IP/s:\n$IP\n+STATUS: $HTTP(HTTP) e $HTTPS(HTTPS)"
+# Lendo o conteúdo da variável das urls
 done < "$ARQ"
