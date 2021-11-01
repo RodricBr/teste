@@ -8,10 +8,10 @@ HORA="$(date +'%d/%m/%y | %T')"
 echo "+----------[ Resultados $HORA ]----------+"
 
 while IFS= read -r line; do
-  WEBSITEHTTP=$(echo "http://$line")
-  WEBSITEHTTPS=$(echo "https://$line")
-  HTTP=$(echo | curl -s -w "%{http_code}\n" $WEBSITEHTTP -o /dev/null)
-  HTTPS=$(echo | curl -sL -w "%{http_code}\n" $WEBSITEHTTPS -o /dev/null)
+  WEBHTTP=$(echo "http://$line")
+  WEBHTTPS=$(echo "https://$line")
+  HTTP=$(echo | curl -s -w "%{http_code}\n" $WEBHTTP -o /dev/null)
+  HTTPS=$(echo | curl -sL -w "%{http_code}\n" $WEBHTTPS -o /dev/null)
   domain=$(echo $line | awk -F[/:] '{print $1}')
   IP=$(echo | nslookup $domain | awk '/^Address/{n++; if (n==2) {print $2}; if (n==3){print $2}; if (n==4){exit}}')
   
